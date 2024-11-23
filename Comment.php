@@ -1,4 +1,7 @@
 <?php
+
+namespace App;
+
 class Comment {
     public string $uuid;
     public string $postUuid;

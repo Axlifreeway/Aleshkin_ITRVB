@@ -1,5 +1,11 @@
 <?php
 
+namespace App\Repositories;
+
+use App\Post;
+use PDO;
+use Exception;
+
 class PostsRepository implements PostsRepositoryInterface {
     private PDO $db;
 

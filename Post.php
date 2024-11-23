@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class Post {
     public string $uuid;
     public string $authorUuid;

@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class User {
     public string $uuid;
     public string $username;

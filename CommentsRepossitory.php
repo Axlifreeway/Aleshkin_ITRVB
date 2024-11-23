@@ -1,5 +1,11 @@
 <?php
 
+namespace App\Repositories;
+
+use App\Comment;
+use PDO;
+use Exception;
+
 class CommentsRepository implements CommentsRepositoryInterface {
     private PDO $db;
 
