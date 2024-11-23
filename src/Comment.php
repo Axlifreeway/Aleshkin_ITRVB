@@ -13,4 +13,20 @@ class Comment {
         $this->articleId = $articleId;
         $this->content = $content;
     }
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getAuthorId() {
+        return $this->authorId;
+    }
+
+    public function getArticleId() {
+        return $this->articleId;
+    }
+
+    public function getContent() {
+        return $this->content;
+    }
 }

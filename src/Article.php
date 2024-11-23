@@ -13,4 +13,20 @@ class Article {
         $this->title = $title;
         $this->content = $content;
     }
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getAuthorId() {
+        return $this->authorId;
+    }
+
+    public function getTitle() {
+        return $this->title;
+    }
+
+    public function getContent() {
+        return $this->content;
+    }
 }
