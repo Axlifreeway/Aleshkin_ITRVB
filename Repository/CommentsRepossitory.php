@@ -18,7 +18,7 @@ class CommentsRepository implements CommentsRepositoryInterface {
         $stmt->execute(['uuid' => $uuid]);
         $comment = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($comment === false) {
+        if (!$comment) {
             throw new Exception("Comment not found.");
         }
 

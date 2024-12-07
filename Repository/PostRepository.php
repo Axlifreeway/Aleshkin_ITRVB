@@ -18,7 +18,7 @@ class PostsRepository implements PostsRepositoryInterface {
         $stmt->execute(['uuid' => $uuid]);
         $post = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($post === false) {
+        if (!$post) {
             throw new Exception("Post not found.");
         }
 
