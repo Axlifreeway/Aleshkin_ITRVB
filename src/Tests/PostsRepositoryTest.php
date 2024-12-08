@@ -4,8 +4,6 @@ use PHPUnit\Framework\TestCase;
 use App\Repositories\PostRepository;
 use App\Models\Post;
 use Ramsey\Uuid\Uuid;
-use PDO;
-use Exception;
 
 class PostsRepositoryTest extends TestCase {
     private PDO $pdo;
@@ -15,7 +13,7 @@ class PostsRepositoryTest extends TestCase {
         $this->pdo = new PDO('sqlite::memory:');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = file_get_contents('init_db.sql');
+        $sql = file_get_contents('init.sql');
         $this->pdo->exec($sql);
 
         $this->repository = new PostRepository($this->pdo);

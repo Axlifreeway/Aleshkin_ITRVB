@@ -4,8 +4,6 @@ use PHPUnit\Framework\TestCase;
 use App\Repositories\CommentsRepository;
 use App\Models\Comment;
 use Ramsey\Uuid\Uuid;
-use PDO;
-use Exception;
 
 class CommentsRepositoryTest extends TestCase {
     private PDO $pdo;
