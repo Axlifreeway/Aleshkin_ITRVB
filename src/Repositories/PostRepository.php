@@ -3,14 +3,17 @@
 namespace App\Repositories;
 
 use App\Models\Post;
+use App\Logging\ILoggerInterface;
 use PDO;
 use Exception;
 
 class PostRepository implements IPostRepository {
     private PDO $db;
+    private ILoggerInterface $logger;
 
-    public function __construct(PDO $db) {
+    public function __construct(PDO $db, ILoggerInterface $logger) {
         $this->db = $db;
+        $this->logger = $logger;
     }
 
     public function get(string $uuid): Post {
@@ -18,8 +21,8 @@ class PostRepository implements IPostRepository {
         $stmt->execute(['uuid' => $uuid]);
         $post = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($post === false) {
-            throw new Exception("Post not found.");
+        if (!$post) {
+            $this->logger->warning("Не удалось найти статью с UUID: $uuid");
         }
 
         return new Post($post['uuid'], $post['author_uuid'], $post['title'], $post['text']);
@@ -36,7 +39,8 @@ class PostRepository implements IPostRepository {
             'title' => $post->title,
             'text' => $post->text
         ]);
+
+        $this->logger->info("Сохранена статья с UUID: {$post->uuid}");
     }
 }
-
 ?>
