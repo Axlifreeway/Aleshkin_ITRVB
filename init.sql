@@ -6,6 +6,14 @@ CREATE TABLE posts (
     FOREIGN KEY (author_uuid) REFERENCES users (uuid)
 );
 
+CREATE TABLE likes (
+    uuid TEXT PRIMARY KEY,
+    entity_uuid TEXT NOT NULL,
+    user_uuid TEXT NOT NULL,
+    UNIQUE(entity_uuid, user_uuid),
+    FOREIGN KEY (user_uuid) REFERENCES users (uuid)
+);
+
 CREATE TABLE comments (
     uuid TEXT PRIMARY KEY,
     post_uuid TEXT,

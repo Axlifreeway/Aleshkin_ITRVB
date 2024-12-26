@@ -5,6 +5,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 use App\Models\Comment;
 use App\Repositories\CommentsRepository;
 use App\Repositories\PostRepository;
+use App\Models\Like;
+use App\Repositories\LikeRepository;
 use Ramsey\Uuid\Uuid;
 
 $pdo = new PDO('sqlite:database.sqlite');
@@ -16,6 +18,9 @@ $commentsRepository = new CommentsRepository($pdo);
 $postsRepository = new PostRepository($pdo);
 
 file_put_contents('debug.log', json_encode($input) . PHP_EOL, FILE_APPEND);
+
+// Запрос для комментариев
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/posts/comment') {
     header('Content-Type: application/json');
     $input = json_decode(file_get_contents('php://input'), true);
@@ -43,6 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/posts
     exit;
 }
 
+// Запрос для статей
+
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && str_starts_with($_SERVER['REQUEST_URI'], '/posts')) {
     header('Content-Type: application/json');
 
@@ -66,6 +73,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && str_starts_with($_SERVER['REQUEST
     } catch (Exception $e) {
         http_response_code(404);
         echo json_encode(['error' => 'Post not found']);
+    }
+
+    exit;
+}
+
+// Запрос для лайков
+
+$likeRepository = new LikeRepository($pdo);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && preg_match('/\/likes\/add$/', $_SERVER['REQUEST_URI'])) {
+    $input = json_decode(file_get_contents('php://input'), true);
+    if (!isset($input['entity_uuid'], $input['user_uuid'])) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Missing required fields']);
+        exit;
+    }
+
+    if (!preg_match('/^[a-f0-9\-]{36}$/i', $input['entity_uuid']) || !preg_match('/^[a-f0-9\-]{36}$/i', $input['user_uuid'])) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Invalid UUID format']);
+        exit;
+    }
+
+    try {
+        $existingLikes = $likeRepository->getByEntityUuid($input['entity_uuid']);
+        foreach ($existingLikes as $like) {
+            if ($like['user_uuid'] === $input['user_uuid']) {
+                http_response_code(400);
+                echo json_encode(['error' => 'User has already liked this entity']);
+                exit;
+            }
+        }
+
+        $like = new Like(Uuid::uuid4()->toString(), $input['entity_uuid'], $input['user_uuid']);
+        $likeRepository->save($like);
+
+        http_response_code(201);
+        echo json_encode(['message' => 'Like added successfully']);
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Failed to add like']);
     }
 
     exit;
