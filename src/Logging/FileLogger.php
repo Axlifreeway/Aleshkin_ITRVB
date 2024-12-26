@@ -2,7 +2,7 @@
 
 namespace App\Logging;
 
-class FileLogger implements LoggerInterface {
+class FileLogger implements ILoggerInterface {
     private string $logFile;
 
     public function __construct(string $logFile) {

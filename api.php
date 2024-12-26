@@ -3,10 +3,14 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use App\Models\Comment;
+use App\Models\Like;
 use App\Repositories\CommentsRepository;
 use App\Repositories\PostRepository;
-use App\Models\Like;
 use App\Repositories\LikeRepository;
+use App\Repositories\TokenRepository;
+use App\Auth\TokenService;
+use App\Logging\FileLogger;
+use App\Logging\ILoggerInterface;
 use Ramsey\Uuid\Uuid;
 
 $pdo = new PDO('sqlite:database.sqlite');
@@ -14,14 +18,23 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $input = json_decode(file_get_contents('php://input'), true);
 
-$commentsRepository = new CommentsRepository($pdo);
-$postsRepository = new PostRepository($pdo);
+$logger = new FileLogger(__DIR__ . '/logs/app.log');
+
+$commentsRepository = new CommentsRepository($pdo, $logger);
+$postsRepository = new PostRepository($pdo, $logger);
+$likeRepository = new LikeRepository($pdo, $logger);
 
 file_put_contents('debug.log', json_encode($input) . PHP_EOL, FILE_APPEND);
 
 // Запрос для комментариев
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/posts/comment') {
+    $authHeader = getallheaders()['Authorization'] ?? null;
+    if (!$authHeader || !preg_match('/Bearer (.+)/', $authHeader, $matches)) {
+        http_response_code(401);
+        echo json_encode(['error' => 'Unauthorized']);
+        exit;
+    }
     header('Content-Type: application/json');
     $input = json_decode(file_get_contents('php://input'), true);
     if (!isset($input['author_uuid'], $input['post_uuid'], $input['text'])) {
@@ -80,9 +93,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && str_starts_with($_SERVER['REQUEST
 
 // Запрос для лайков
 
-$likeRepository = new LikeRepository($pdo);
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && preg_match('/\/likes\/add$/', $_SERVER['REQUEST_URI'])) {
+    $authHeader = getallheaders()['Authorization'] ?? null;
+    if (!$authHeader || !preg_match('/Bearer (.+)/', $authHeader, $matches)) {
+        http_response_code(401);
+        echo json_encode(['error' => 'Unauthorized']);
+        exit;
+    }
+
     $input = json_decode(file_get_contents('php://input'), true);
     if (!isset($input['entity_uuid'], $input['user_uuid'])) {
         http_response_code(400);
