@@ -25,6 +25,6 @@ CREATE TABLE comments (
 
 CREATE TABLE users (
     uuid TEXT PRIMARY KEY,
-    first_name TEXT,
-    last_name TEXT
+    firstName TEXT,
+    lastName TEXT
 );
