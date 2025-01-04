@@ -1,12 +1,12 @@
 :root {
  --phpunit-breadcrumbs: var(--bs-gray-200);
  --phpunit-success-bar: #28a745;
- --phpunit-success-high: {{success-high}};
- --phpunit-success-medium: {{success-medium}};
- --phpunit-success-low: {{success-low}};
- --phpunit-warning: {{warning}};
+ --phpunit-success-high: #99cb84;
+ --phpunit-success-medium: #c3e3b5;
+ --phpunit-success-low: #dff0d8;
+ --phpunit-warning: #fcf8e3;
  --phpunit-warning-bar: #ffc107;
- --phpunit-danger: {{danger}};
+ --phpunit-danger: #f2dede;
  --phpunit-danger-bar: #dc3545;
 }
 
