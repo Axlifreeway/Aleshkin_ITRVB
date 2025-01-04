@@ -19,6 +19,7 @@ class PostRepository implements IPostRepository {
         $post = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($post === false) {
+            error_log("Post with UUID $uuid not found.");
             throw new Exception("Post not found.");
         }
 
