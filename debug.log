@@ -6,3 +6,69 @@ null
 null
 null
 null
+[INFO] Сохранён комментарий с UUID: 2babee04-221d-4038-87e2-bfbf74207ea5
+[INFO] Сохранён комментарий с UUID: 2f894f4f-5195-4594-9f83-d3575fea0dfc
+[WARNING] Не удалось найти комментарий с UUID: ad49dbd5-ee7d-430b-878f-0d2545050b2a
+[INFO] Сохранена статья с UUID: 86724cc0-300a-4f22-8883-9843975fceb8
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"7ec2ad88-9455-45b0-9976-cf147acb6f34","text":"Test Comment"}
+[INFO] Сохранён комментарий с UUID: 97c66f9f-0f18-4e3f-8dfb-5de63bee076d
+[WARNING] Не удалось найти комментарий с UUID: c6cb8847-5e64-4c99-97fa-307bca6190a1
+[INFO] Сохранён комментарий с UUID: dd3e9e41-8865-4a7f-9f42-aaec89d814bc
+[INFO] Сохранён комментарий с UUID: 5e212904-684e-4a60-9f9d-e22eb9707223
+[INFO] Сохранена статья с UUID: baf1b7a3-6f31-4299-be89-4350b2f05326
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"7ec2ad88-9455-45b0-9976-cf147acb6f34","text":"Test Comment"}
+[INFO] Сохранён комментарий с UUID: 671676d7-d8ec-4101-8502-ca6276f2ef9c
+[INFO] Сохранён комментарий с UUID: 92899ad2-f5a9-4cdc-8346-7aa57c1c4443
+[INFO] Сохранён комментарий с UUID: 69c5f261-c5c9-42e8-903b-f2418a3136cb
+[INFO] Сохранена статья с UUID: 6248580f-9690-4380-9187-ea222d69bf1a
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"7ec2ad88-9455-45b0-9976-cf147acb6f34","text":"Test Comment"}
+[INFO] Сохранён комментарий с UUID: efeccaf4-5f48-426d-9ef2-3fee6cb7f12a
+[INFO] Сохранён комментарий с UUID: 67731ab0-d7c2-4694-869a-d2be02341fbf
+[INFO] Сохранён комментарий с UUID: 4fe0662f-6b98-4838-8c6b-07dfe14b3dc0
+[INFO] Сохранена статья с UUID: 489e1638-b2b5-49d1-a35f-667425a5e7c4
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"7ec2ad88-9455-45b0-9976-cf147acb6f34","text":"Test Comment"}
+[INFO] Сохранён комментарий с UUID: 3bf4f6b1-9c8c-49ea-bc65-74648b644e5a
+[INFO] Сохранён комментарий с UUID: fd2d24de-63a7-4ba6-8c55-3d65100df321
+[INFO] Сохранён комментарий с UUID: 63f835d5-35ec-4266-a67d-58d994444579
+[INFO] Сохранена статья с UUID: 608eec09-ebd6-4560-aba8-89b71bf1555d
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"7ec2ad88-9455-45b0-9976-cf147acb6f34","text":"Test Comment"}
+[INFO] Сохранён комментарий с UUID: 13b77807-7be5-4363-826e-1b9c62a7b7ef
+[INFO] Сохранён комментарий с UUID: 98136bc1-1119-4bf5-bf4b-73286481ed3f
+[INFO] Сохранён комментарий с UUID: fd7090f5-a577-4ce6-b4af-e5206a2b470f
+[INFO] Сохранена статья с UUID: 6531e61b-ed8c-4c3e-803e-d5dd94285f44
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"7ec2ad88-9455-45b0-9976-cf147acb6f34","text":"Test Comment"}
+[INFO] Сохранён комментарий с UUID: 541a29a2-9005-42c7-a1dd-fa97ab971013
+[INFO] Сохранена статья с UUID: 2bfc4119-f564-466e-b7fa-1967a3c858eb
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"7ec2ad88-9455-45b0-9976-cf147acb6f34","text":"Test Comment"}
+[INFO] Сохранён комментарий с UUID: f3b165a8-a2cd-4ff3-992a-522415371f61
+[INFO] Сохранена статья с UUID: 75db08b1-4179-4c7e-9562-056ecdee7b6d
+{"author_uuid":"invalid-uuid","post_uuid":"a7255e67-4bcc-4852-8458-fa54d962e643","text":"Test Comment"}
+[INFO] Сохранён комментарий с UUID: c42750ef-80a2-4138-ae08-5dd2e8aa03a0
+[INFO] Сохранён комментарий с UUID: 9fd1f746-e113-401e-9559-22f447f08326
+[INFO] Сохранена статья с UUID: fca7120e-ffb1-4b35-91f0-7662c76ba15e
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"7ec2ad88-9455-45b0-9976-cf147acb6f34","text":"Test Comment"}
+[INFO] Сохранён комментарий с UUID: 9560c222-1bc9-4905-bcda-0e6c8ad3715b
+[INFO] Сохранён комментарий с UUID: 3bfce0ce-1640-4541-80d5-886428427143
+[INFO] Сохранён комментарий с UUID: b0ab662c-ba18-4170-957a-a4b66170aa9d
+[INFO] Сохранена статья с UUID: c52a85d3-ea57-4e0f-81c4-a07d36591d32
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"7ec2ad88-9455-45b0-9976-cf147acb6f34","text":"Test Comment"}
+[INFO] Сохранён комментарий с UUID: ef194216-cf15-4d76-a209-2bd5c5f47d68
+[INFO] Сохранена статья с UUID: 13615b9e-cc8e-4b33-a4b7-e1477b730db7
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"7ec2ad88-9455-45b0-9976-cf147acb6f34","text":"Test Comment"}
+[INFO] Сохранён комментарий с UUID: 790a87a6-0c04-4ed4-8f2d-5b25a85ee1b8
+[INFO] Сохранена статья с UUID: 935492b1-4715-401e-813c-d16d1c086983
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"53106969-d5b7-4156-a425-886a805977f4","text":"Test Comment"}
+[WARNING] Не удалось найти статью с UUID: 53106969-d5b7-4156-a425-886a805977f4
+[INFO] Сохранена статья с UUID: ae3042ca-35ba-411d-9de9-b59ced11cec2
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"53106969-d5b7-4156-a425-886a805977f4","text":"Test Comment"}
+[WARNING] Не удалось найти статью с UUID: 53106969-d5b7-4156-a425-886a805977f4
+[INFO] Сохранена статья с UUID: d001f970-61a5-47d2-bc93-525b62b4094b
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8"}
+[INFO] Сохранена статья с UUID: dd03d712-2fb6-4887-9dbc-647e090b9f9e
+{"author_uuid":"invalid-uuid","post_uuid":"a7255e67-4bcc-4852-8458-fa54d962e643","text":"Test Comment"}
+[INFO] Сохранена статья с UUID: 054695f4-0d37-4ebd-b77e-bfa5ce1fbcb1
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"53106969-d5b7-4156-a425-886a805977f4","text":"Test Comment"}
+[WARNING] Не удалось найти статью с UUID: 53106969-d5b7-4156-a425-886a805977f4
+[INFO] Сохранена статья с UUID: d849e63b-2728-4471-b032-4110bfbf8254
+{"author_uuid":"53106969-d5b7-4156-a425-886a805977f8","post_uuid":"7ec2ad88-9455-45b0-9976-cf147acb6f34","text":"Test Comment"}
+[INFO] Сохранён комментарий с UUID: 7f63dbbf-52d9-42b3-93a7-8ceb9752f863

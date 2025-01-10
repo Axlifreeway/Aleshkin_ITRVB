@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 use App\Repositories\PostRepository;
 use App\Models\Post;
 use Ramsey\Uuid\Uuid;
+use App\Logging\FileLogger;
 
 class PostsRepositoryTest extends TestCase {
     private PDO $pdo;
@@ -13,10 +14,12 @@ class PostsRepositoryTest extends TestCase {
         $this->pdo = new PDO('sqlite::memory:');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+        $logger = new FileLogger('debug.log');
+
         $sql = file_get_contents('init.sql');
         $this->pdo->exec($sql);
 
-        $this->repository = new PostRepository($this->pdo);
+        $this->repository = new PostRepository($this->pdo, $logger);
     }
 
     public function testSavePost(): void {

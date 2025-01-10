@@ -1,11 +1,10 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use App\Repositories\CommentsRepository;
 use App\Repositories\PostRepository;
-use App\Models\Comment;
 use App\Models\Post;
 use Ramsey\Uuid\Uuid;
+use App\Logging\FileLogger;
 
 class DeletePostTest extends TestCase {
     private PDO $pdo;
@@ -18,21 +17,30 @@ class DeletePostTest extends TestCase {
         $sql = file_get_contents('init.sql');
         $this->pdo->exec($sql);
 
-        $this->postsRepository = new PostRepository($this->pdo);
+        $logger = new FileLogger('debug.log');
 
-        $post = new Post('test-post-uuid', 'test-author-uuid', 'Test Title', 'Test Content');
+        $this->postsRepository = new PostRepository($this->pdo, $logger);
+
+        $post = new Post(Uuid::uuid4()->toString(), '53106969-d5b7-4156-a425-886a805977f8', 'Test Title', 'Test Content');
         $this->postsRepository->save($post);
     }
 
     public function testDeletePostSuccess(): void {
-        $response = $this->simulateDeleteRequest('/posts?uuid=test-post-uuid');
+        $response = $this->simulateDeleteRequest('/Aleshkin_ITRVB/api.php/posts?uuid=7ec2ad88-9455-45b0-9976-cf147acb6f34');
 
         $this->assertEquals(200, $response['status']);
         $this->assertEquals('Post deleted', $response['body']['message']);
     }
 
-    public function testPostNotFound(): void {
-        $response = $this->simulateDeleteRequest('/posts?uuid=nonexistent-uuid');
+    public function testDeletePostInvalidUuid(): void {
+        $response = $this->simulateDeleteRequest('/Aleshkin_ITRVB/api.php/posts?uuid=invalid-uuid');
+
+        $this->assertEquals(400, $response['status']);
+        $this->assertEquals('Invalid or missing UUID', $response['body']['error']);
+    }
+
+    public function testDeletePostNotFound(): void {
+        $response = $this->simulateDeleteRequest('/Aleshkin_ITRVB/api.php/posts?uuid=7ec2ad88-9455-45b0-9976-cf147acb6f32');
 
         $this->assertEquals(404, $response['status']);
         $this->assertEquals('Post not found', $response['body']['error']);
@@ -41,6 +49,8 @@ class DeletePostTest extends TestCase {
     private function simulateDeleteRequest(string $url): array {
         $_SERVER['REQUEST_METHOD'] = 'DELETE';
         $_SERVER['REQUEST_URI'] = $url;
+        $_SERVER['CONTENT_TYPE'] = 'application/json';
+
         ob_start();
         require 'api.php';
         $output = ob_get_clean();

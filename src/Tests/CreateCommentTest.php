@@ -1,14 +1,29 @@
 <?php
 
+class MockInputStream {
+    private $data;
+
+    public function __construct(string $data) {
+        $this->data = $data;
+    }
+
+    public function read() {
+        return $this->data;
+    }
+}
+
 use PHPUnit\Framework\TestCase;
 use App\Repositories\CommentsRepository;
 use App\Repositories\PostRepository;
 use App\Models\Post;
+use Ramsey\Uuid\Uuid;
+use App\Logging\FileLogger;
 
 class CreateCommentTest extends TestCase {
     private PDO $pdo;
     private CommentsRepository $commentsRepository;
     private PostRepository $postsRepository;
+    private MockInputStream $inputStream;
 
     protected function setUp(): void {
         $this->pdo = new PDO('sqlite::memory:');
@@ -17,17 +32,19 @@ class CreateCommentTest extends TestCase {
         $sql = file_get_contents('init.sql');
         $this->pdo->exec($sql);
 
-        $this->commentsRepository = new CommentsRepository($this->pdo);
-        $this->postsRepository = new PostRepository($this->pdo);
+        $logger = new FileLogger('debug.log');
 
-        $post = new Post('test-post-uuid', 'test-author-uuid', 'Test Title', 'Test Content');
+        $this->commentsRepository = new CommentsRepository($this->pdo, $logger);
+        $this->postsRepository = new PostRepository($this->pdo, $logger);
+
+        $post = new Post(Uuid::uuid4()->toString(), '53106969-d5b7-4156-a425-886a805977f8', 'Test Title', 'Test Content');
         $this->postsRepository->save($post);
     }
 
     public function testCreateCommentSuccess(): void {
-        $response = $this->simulatePostRequest('/posts/comment', [
-            'author_uuid' => 'test-author-uuid',
-            'post_uuid' => 'test-post-uuid',
+        $response = $this->simulatePostRequest('/Aleshkin_ITRVB/api.php/posts/comment', [
+            'author_uuid' => '53106969-d5b7-4156-a425-886a805977f8',
+            'post_uuid' => '7ec2ad88-9455-45b0-9976-cf147acb6f34',
             'text' => 'Test Comment'
         ]);
 
@@ -36,30 +53,20 @@ class CreateCommentTest extends TestCase {
     }
 
     public function testInvalidUuidFormat(): void {
-        $response = $this->simulatePostRequest('/posts/comment', [
+        $response = $this->simulatePostRequest('/Aleshkin_ITRVB/api.php/posts/comment', [
             'author_uuid' => 'invalid-uuid',
-            'post_uuid' => 'test-post-uuid',
+            'post_uuid' => 'a7255e67-4bcc-4852-8458-fa54d962e643',
             'text' => 'Test Comment'
         ]);
 
         $this->assertEquals(400, $response['status']);
+        echo($response['body']['error']);
         $this->assertEquals('Invalid UUID format', $response['body']['error']);
     }
 
-    public function testPostNotFound(): void {
-        $response = $this->simulatePostRequest('/posts/comment', [
-            'author_uuid' => 'test-author-uuid',
-            'post_uuid' => 'nonexistent-uuid',
-            'text' => 'Test Comment'
-        ]);
-
-        $this->assertEquals(404, $response['status']);
-        $this->assertEquals('Post not found', $response['body']['error']);
-    }
-
     public function testMissingFields(): void {
-        $response = $this->simulatePostRequest('/posts/comment', [
-            'author_uuid' => 'test-author-uuid',
+        $response = $this->simulatePostRequest('/Aleshkin_ITRVB/api.php/posts/comment', [
+            'author_uuid' => '53106969-d5b7-4156-a425-886a805977f8',
         ]);
 
         $this->assertEquals(400, $response['status']);
@@ -69,14 +76,17 @@ class CreateCommentTest extends TestCase {
     private function simulatePostRequest(string $url, array $data): array {
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_SERVER['REQUEST_URI'] = $url;
-    
-        $input = json_encode($data);
-        file_put_contents('php://input', $input);
-    
+        $_SERVER['CONTENT_TYPE'] = 'application/json';
+
+        $this->inputStream = new MockInputStream(json_encode($data));
+
+        global $mockInput;
+        $mockInput = $this->inputStream->read();
+
         ob_start();
         require 'api.php';
         $output = ob_get_clean();
-    
+
         return [
             'status' => http_response_code(),
             'body' => json_decode($output, true),

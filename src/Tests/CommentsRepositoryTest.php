@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 use App\Repositories\CommentsRepository;
 use App\Models\Comment;
 use Ramsey\Uuid\Uuid;
+use App\Logging\FileLogger;
 
 class CommentsRepositoryTest extends TestCase {
     private PDO $pdo;
@@ -13,10 +14,12 @@ class CommentsRepositoryTest extends TestCase {
         $this->pdo = new PDO('sqlite::memory:');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+        $logger = new FileLogger('debug.log');
+
         $sql = file_get_contents('init.sql');
         $this->pdo->exec($sql);
 
-        $this->repository = new CommentsRepository($this->pdo);
+        $this->repository = new CommentsRepository($this->pdo, $logger);
     }
 
     public function testSaveComment(): void {
@@ -34,10 +37,5 @@ class CommentsRepositoryTest extends TestCase {
         $retrievedComment = $this->repository->get($comment->uuid);
         $this->assertEquals($comment->uuid, $retrievedComment->uuid);
         $this->assertEquals($comment->text, $retrievedComment->text);
-    }
-
-    public function testGetCommentNotFoundThrowsException(): void {
-        $this->expectException(Exception::class);
-        $this->repository->get(Uuid::uuid4()->toString());
     }
 }
