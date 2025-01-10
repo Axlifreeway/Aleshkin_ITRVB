@@ -39,7 +39,7 @@ class CreateCommentTest extends TestCase {
     }
 
     public function testCreateCommentSuccess(): void {
-        $response = $this->simulatePostRequest('/posts/comment', [
+        $response = $this->simulatePostRequest('/Aleshkin_ITRVB/api.php/posts/comment', [
             'author_uuid' => '53106969-d5b7-4156-a425-886a805977f8',
             'post_uuid' => '7ec2ad88-9455-45b0-9976-cf147acb6f34',
             'text' => 'Test Comment'
@@ -50,7 +50,7 @@ class CreateCommentTest extends TestCase {
     }
 
     public function testInvalidUuidFormat(): void {
-        $response = $this->simulatePostRequest('/posts/comment', [
+        $response = $this->simulatePostRequest('/Aleshkin_ITRVB/api.php/posts/comment', [
             'author_uuid' => 'invalid-uuid',
             'post_uuid' => 'a7255e67-4bcc-4852-8458-fa54d962e643',
             'text' => 'Test Comment'
@@ -62,7 +62,7 @@ class CreateCommentTest extends TestCase {
     }
 
     public function testPostNotFound(): void {
-        $response = $this->simulatePostRequest('/posts/comment', [
+        $response = $this->simulatePostRequest('/Aleshkin_ITRVB/api.php/posts/comment', [
             'author_uuid' => '53106969-d5b7-4156-a425-886a805977f8',
             'post_uuid' => '53106969-d5b7-4156-a425-886a805977f4',
             'text' => 'Test Comment'
@@ -73,7 +73,7 @@ class CreateCommentTest extends TestCase {
     }
 
     public function testMissingFields(): void {
-        $response = $this->simulatePostRequest('/posts/comment', [
+        $response = $this->simulatePostRequest('/Aleshkin_ITRVB/api.php/posts/comment', [
             'author_uuid' => '53106969-d5b7-4156-a425-886a805977f8',
         ]);
 

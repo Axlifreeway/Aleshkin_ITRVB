@@ -1,4 +1,4 @@
-CREATE TABLE posts (
+CREATE TABLE IF NOT EXISTS posts (
     uuid TEXT PRIMARY KEY,
     author_uuid TEXT,
     title TEXT,
@@ -6,7 +6,7 @@ CREATE TABLE posts (
     FOREIGN KEY (author_uuid) REFERENCES users (uuid)
 );
 
-CREATE TABLE comments (
+CREATE TABLE IF NOT EXISTS comments (
     uuid TEXT PRIMARY KEY,
     post_uuid TEXT,
     author_uuid TEXT,
@@ -15,8 +15,14 @@ CREATE TABLE comments (
     FOREIGN KEY (author_uuid) REFERENCES users (uuid)
 );
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     uuid TEXT PRIMARY KEY,
     first_name TEXT,
     last_name TEXT
 );
+
+INSERT INTO users (uuid, first_name, last_name) VALUES
+('53106969-d5b7-4156-a425-886a805977f8', 'Имя', 'Фамилия');
+
+INSERT INTO posts (uuid, author_uuid, title, text) VALUES
+('7ec2ad88-9455-45b0-9976-cf147acb6f34', '53106969-d5b7-4156-a425-886a805977f8', 'Заголовок поста', 'Текст поста');

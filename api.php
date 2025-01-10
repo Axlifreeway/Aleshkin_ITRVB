@@ -17,14 +17,14 @@ $commentsRepository = new CommentsRepository($pdo);
 $postsRepository = new PostRepository($pdo);
 
 file_put_contents('debug.log', json_encode($input) . PHP_EOL, FILE_APPEND);
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/posts/comment') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/Aleshkin_ITRVB/api.php/posts/comment') {
     $response = handlePostComment($input, $postsRepository, $commentsRepository);
     http_response_code($response['status']);
     header('Content-Type: application/json');
     echo json_encode($response['body']);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && str_starts_with($_SERVER['REQUEST_URI'], '/posts')) {
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && str_starts_with($_SERVER['REQUEST_URI'], '/Aleshkin_ITRVB/api.php/posts')) {
     header('Content-Type: application/json');
     $response = handleDeletePost($_SERVER['REQUEST_URI'], $postsRepository, $pdo);
     http_response_code($response['status']);
