@@ -25,21 +25,21 @@ class DeletePostTest extends TestCase {
     }
 
     public function testDeletePostSuccess(): void {
-        $response = $this->simulateDeleteRequest('/posts?uuid=7ec2ad88-9455-45b0-9976-cf147acb6f34');
+        $response = $this->simulateDeleteRequest('/Aleshkin_ITRVB/api.php/posts?uuid=7ec2ad88-9455-45b0-9976-cf147acb6f34');
 
         $this->assertEquals(200, $response['status']);
         $this->assertEquals('Post deleted', $response['body']['message']);
     }
 
     public function testDeletePostInvalidUuid(): void {
-        $response = $this->simulateDeleteRequest('/posts?uuid=invalid-uuid');
+        $response = $this->simulateDeleteRequest('/Aleshkin_ITRVB/api.php/posts?uuid=invalid-uuid');
 
         $this->assertEquals(400, $response['status']);
         $this->assertEquals('Invalid or missing UUID', $response['body']['error']);
     }
 
     public function testDeletePostNotFound(): void {
-        $response = $this->simulateDeleteRequest('/posts?uuid=7ec2ad88-9455-45b0-9976-cf147acb6f32');
+        $response = $this->simulateDeleteRequest('/Aleshkin_ITRVB/api.php/posts?uuid=7ec2ad88-9455-45b0-9976-cf147acb6f32');
 
         $this->assertEquals(404, $response['status']);
         $this->assertEquals('Post not found', $response['body']['error']);
