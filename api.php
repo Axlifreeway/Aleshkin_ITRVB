@@ -21,26 +21,26 @@ $likeRepository = new LikeRepository($pdo);
 
 file_put_contents('debug.log', json_encode($input) . PHP_EOL, FILE_APPEND);
 
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/posts/comment') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/Aleshkin_ITRVB/api.php/posts/comment') {
     $response = handlePostComment($input, $postsRepository, $commentsRepository);
     http_response_code($response['status']);
     header('Content-Type: application/json');
     echo json_encode($response['body']);
+    exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && str_starts_with($_SERVER['REQUEST_URI'], '/posts')) {
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && str_starts_with($_SERVER['REQUEST_URI'], '/Aleshkin_ITRVB/api.php/posts')) {
     header('Content-Type: application/json');
     $response = handleDeletePost($_SERVER['REQUEST_URI'], $postsRepository, $pdo);
     http_response_code($response['status']);
     echo json_encode($response['body']);
+    exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && preg_match('/\/likes\/add$/', $_SERVER['REQUEST_URI'])) {
-    $input = json_decode(file_get_contents('php://input'), true);
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SERVER['REQUEST_URI'] === '/Aleshkin_ITRVB/api.php/likes/add') {
+    header('Content-Type: application/json');
     $response = handleAddLike($input, $likeRepository);
     http_response_code($response['status']);
-    header('Content-Type: application/json');
     echo json_encode($response['body']);
     exit;
 }
@@ -116,7 +116,8 @@ function handleAddLike($input, $likeRepository) {
         ];
     }
 
-    if (!preg_match('/^[a-f0-9\-]{36}$/i', $input['entity_uuid']) || !preg_match('/^[a-f0-9\-]{36}$/i', $input['user_uuid'])) {
+    if (!preg_match('/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/', $input['entity_uuid']) 
+    || !preg_match('/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/', $input['user_uuid'])) {
          return [
             'status' => 400,
             'body' => ['error' => 'Invalid UUID format']

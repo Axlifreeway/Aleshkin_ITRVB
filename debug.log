@@ -35,3 +35,21 @@ null
 null
 null
 {"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a45"}
+{"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a45"}
+{"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a45"}
+{"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a45"}
+{"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a45"}
+1 
+{"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a45"}
+1 /Aleshkin_ITRVB/api.php/posts/comment
+{"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a45"}
+1 /Aleshkin_ITRVB/api.php/posts/comment
+{"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a45"}
+{"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a456-426614174001","text":"This is a comment"}
+{"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a456-426614174001","text":"This is a comment"}
+{"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a456-426614174001","text":"This is a comment"}
+{"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a456-426614174001","text":"This is a comment"}
+{"author_uuid":"123e4567-e89b-12d3-a456-426614174000","post_uuid":"123e4567-e89b-12d3-a456-426614174001","text":"This is a comment"}
+null
+{"entity_uuid":"123e4567-e89b-12d3-a456-426614174000","user_uuid":"123e4567-e89b-12d3-a456-426614174001"}
+{"entity_uuid":"a7255e67-4bcc-4852-8458-fa54d962e643","user_uuid":"123e4567-e89b-12d3-a456-426614174001"}
